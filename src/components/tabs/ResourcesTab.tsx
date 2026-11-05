@@ -5,10 +5,10 @@ import { cn } from '../../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const RESOURCE_TYPES = [
-  { id: 'link', icon: LinkIcon, label: 'Link / Article' },
-  { id: 'video', icon: Video, label: 'Video / Tutorial' },
-  { id: 'book', icon: BookOpen, label: 'Book / Guide' },
-  { id: 'note', icon: FileText, label: 'Notes / Cheat Sheet' },
+  { id: 'link', icon: LinkIcon, label: 'Liên kết / Bài viết' },
+  { id: 'video', icon: Video, label: 'Video / Clip hướng dẫn' },
+  { id: 'book', icon: BookOpen, label: 'Sách / Giáo trình' },
+  { id: 'note', icon: FileText, label: 'Ghi chú / Cheat Sheet' },
 ];
 
 export function ResourcesTab() {
@@ -37,19 +37,19 @@ export function ResourcesTab() {
       <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-2">
           <div>
-            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-              📚 Pillar 2: Resource Curator (Learn Enough to Self-Correct)
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              📚 Trụ cột 2: Học Đủ Để Tự Sửa Sai (Learn Enough to Self-Correct)
             </h2>
-            <p className="text-sm text-slate-400 mt-1">
-              Gather 3 to 5 reference materials only to recognize when you're making mistakes and self-correct.
+            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+              Chỉ thu thập từ 3 đến 5 nguồn tài liệu uy tín để nhận biết khi nào mình làm sai và cách sửa lại. Tránh sa đà vào việc sưu tầm quá nhiều.
             </p>
           </div>
           <button
             onClick={() => setShowForm(!showForm)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-sm text-slate-300 font-medium transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-semibold transition-colors border border-slate-700"
           >
             <Plus className="w-4 h-4 text-indigo-400" />
-            Add Resource
+            Thêm tài liệu
           </button>
         </div>
 
@@ -58,15 +58,15 @@ export function ResourcesTab() {
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-4 p-4 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-start gap-3"
+            className="mt-4 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3"
           >
             <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
             <div>
-              <p className="text-sm font-semibold text-amber-300">
-                Anti-Procrastination Rule Triggered: {resources.length} / 5 Resources
+              <p className="text-xs font-bold text-amber-300 uppercase tracking-wider">
+                Kích hoạt quy tắc Chống Trì Hoãn: Đã lưu {resources.length} / 5 tài liệu!
               </p>
               <p className="text-xs text-amber-300/80 mt-1 leading-relaxed">
-                Collecting excessive tutorials is often productive procrastination. You now have plenty of guidance. Stop researching and start logging deliberate practice hours!
+                Nghiên cứu tài liệu không phải là luyện tập. Bạn đã có đủ kiến thức lý thuyết để bắt đầu rồi — hãy dừng việc đọc thêm và chuyển sang bấm giờ thực hành ngay!
               </p>
             </div>
           </motion.div>
@@ -76,7 +76,7 @@ export function ResourcesTab() {
         {!showWarning && (
           <div className="mt-4 p-3 rounded-xl bg-slate-800/40 border border-slate-800 flex items-center gap-2.5 text-xs text-slate-400">
             <Info className="w-4 h-4 text-indigo-400 shrink-0" />
-            <span>Recommended: Cap your list at 3–5 high quality guides to avoid tutorial paralysis ({resources.length}/5 added).</span>
+            <span>Khuyến nghị Kaufman: Giới hạn tối đa 3–5 tài liệu để tránh hội chứng "học lý thuyết quá đà" (Hiện có: {resources.length}/5).</span>
           </div>
         )}
 
@@ -113,8 +113,8 @@ export function ResourcesTab() {
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Resource Title (e.g., JustinGuitar 10-minute chord transitions)"
-                  className="w-full px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+                  placeholder="Tên tài liệu (Ví dụ: Video 10 phút luyện bấm hợp âm sạch, Sách nhập môn...)"
+                  className="w-full px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
                   autoFocus
                 />
 
@@ -123,32 +123,32 @@ export function ResourcesTab() {
                     type="url"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    placeholder="https://youtube.com/... or https://..."
-                    className="w-full px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+                    placeholder="https://youtube.com/... hoặc liên kết web"
+                    className="w-full px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
                   />
                 )}
 
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Key takeaway or self-correction checklist from this source..."
+                  placeholder="Ghi chú điểm mấu chốt để tự nhận diện lỗi sai khi tập..."
                   rows={2}
-                  className="w-full px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition-colors resize-none"
+                  className="w-full px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-xs focus:outline-none focus:border-indigo-500 transition-colors resize-none"
                 />
 
                 <div className="flex gap-2">
                   <button
                     onClick={handleAdd}
                     disabled={!title.trim()}
-                    className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-600 text-white font-medium text-xs transition-colors"
+                    className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-600 text-white font-bold text-xs transition-colors"
                   >
-                    Save Resource
+                    Lưu tài liệu
                   </button>
                   <button
                     onClick={() => setShowForm(false)}
-                    className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs transition-colors"
+                    className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition-colors"
                   >
-                    Cancel
+                    Hủy
                   </button>
                 </div>
               </div>
@@ -179,7 +179,7 @@ export function ResourcesTab() {
                 <button
                   onClick={() => toggleResourceConsumed(res.id)}
                   className="shrink-0 p-1 rounded hover:bg-slate-800 text-slate-500 hover:text-emerald-400 transition-colors"
-                  title={res.is_consumed ? 'Mark as unread' : 'Mark as studied'}
+                  title={res.is_consumed ? 'Đánh dấu chưa đọc' : 'Đánh dấu đã hiểu'}
                 >
                   {res.is_consumed ? (
                     <Check className="w-4 h-4 text-emerald-400" />
@@ -191,14 +191,14 @@ export function ResourcesTab() {
                 <div className="flex-1 min-w-0">
                   <p
                     className={cn(
-                      'text-sm font-medium truncate',
+                      'text-xs font-semibold truncate',
                       res.is_consumed ? 'text-slate-500 line-through' : 'text-slate-200'
                     )}
                   >
                     {res.title}
                   </p>
                   {res.notes && (
-                    <p className="text-xs text-slate-400 truncate mt-0.5">{res.notes}</p>
+                    <p className="text-[11px] text-slate-400 truncate mt-0.5">{res.notes}</p>
                   )}
                 </div>
 
@@ -208,7 +208,7 @@ export function ResourcesTab() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="shrink-0 p-2 rounded-lg text-slate-400 hover:text-indigo-400 hover:bg-slate-800 transition-colors"
-                    title="Open link in browser"
+                    title="Mở liên kết trong trình duyệt"
                   >
                     <ExternalLink className="w-4 h-4" />
                   </a>
@@ -217,7 +217,7 @@ export function ResourcesTab() {
                 <button
                   onClick={() => removeResource(res.id)}
                   className="shrink-0 p-2 rounded-lg text-slate-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all"
-                  title="Delete resource"
+                  title="Xóa tài liệu"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -232,15 +232,15 @@ export function ResourcesTab() {
           <div className="w-12 h-12 rounded-xl bg-slate-800/80 flex items-center justify-center mx-auto mb-3 text-2xl">
             📚
           </div>
-          <h3 className="text-base font-semibold text-slate-300 mb-1">No resources yet</h3>
-          <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4">
-            Curate 3-5 reliable guides or reference sheets to consult when you get stuck.
+          <h3 className="text-sm font-bold text-slate-300 mb-1">Chưa có tài liệu nào</h3>
+          <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4 leading-relaxed">
+            Thêm 3–5 cuốn sách, video hoặc bảng tra cứu cơ bản để tham chiếu khi mắc lỗi.
           </p>
           <button
             onClick={() => setShowForm(true)}
-            className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-colors"
+            className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors"
           >
-            Add First Resource
+            Thêm tài liệu đầu tiên
           </button>
         </div>
       )}

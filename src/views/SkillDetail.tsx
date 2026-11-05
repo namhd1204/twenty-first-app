@@ -25,12 +25,12 @@ export function SkillDetail() {
   if (!skill) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-        <p className="text-slate-400 mb-4">No active skill selected.</p>
+        <p className="text-slate-400 mb-4 text-sm">Chưa chọn kỹ năng nào.</p>
         <button
           onClick={() => setCurrentView('dashboard')}
-          className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold"
+          className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold"
         >
-          Return to Dashboard
+          Quay lại Bảng Điều Khiển
         </button>
       </div>
     );
@@ -41,10 +41,10 @@ export function SkillDetail() {
   const isCompleted = skill.logged_hours >= skill.target_hours;
 
   const tabs = [
-    { id: 'deconstruct' as const, icon: Layers, label: '1. Deconstruct', subtitle: '80/20 Sub-skills' },
-    { id: 'resources' as const, icon: BookOpen, label: '2. Resources', subtitle: 'Self-correct (≤5)' },
-    { id: 'barriers' as const, icon: Shield, label: '3. Barriers', subtitle: 'Pre-flight check' },
-    { id: 'practice' as const, icon: Timer, label: '4. Practice Log', subtitle: 'Timer & Milestones' },
+    { id: 'deconstruct' as const, icon: Layers, label: '1. Phân Rã Kỹ Năng', subtitle: 'Chiến lược 80/20' },
+    { id: 'resources' as const, icon: BookOpen, label: '2. Học Đủ Để Sửa Sai', subtitle: '3-5 tài liệu uy tín' },
+    { id: 'barriers' as const, icon: Shield, label: '3. Loại Bỏ Rào Cản', subtitle: 'Kiểm tra tiền trạm' },
+    { id: 'practice' as const, icon: Timer, label: '4. Đếm Giờ & Cột Mốc', subtitle: 'Thực hành 20 giờ' },
   ];
 
   return (
@@ -57,7 +57,7 @@ export function SkillDetail() {
             className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white px-3 py-1.5 rounded-lg hover:bg-slate-800 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Dashboard
+            Quay lại Bảng điều khiển
           </button>
         </div>
 
@@ -78,20 +78,20 @@ export function SkillDetail() {
             <ProgressRing progress={progress} size={110} strokeWidth={8} color={skill.color}>
               <div className="text-center">
                 <span className="text-xl font-extrabold text-white">{Math.round(progress)}%</span>
-                <span className="block text-[10px] text-slate-400 font-medium">of 20h</span>
+                <span className="block text-[10px] text-slate-400 font-medium">/ 20 giờ</span>
               </div>
             </ProgressRing>
 
             {/* Campaign Meta */}
             <div className="flex-1 text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-2 mb-1.5">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: skill.color }} />
-                <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              <div className="flex items-center justify-center md:justify-start gap-2.5 mb-1.5">
+                <div className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: skill.color }} />
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                   {skill.name}
                 </h1>
                 {isCompleted && (
-                  <span className="text-xs bg-emerald-500/20 text-emerald-400 font-semibold px-2 py-0.5 rounded-full border border-emerald-500/30">
-                    Mastered (20h)
+                  <span className="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                    Đã Thuần Thục (20h)
                   </span>
                 )}
               </div>
@@ -101,26 +101,26 @@ export function SkillDetail() {
                   {skill.description}
                 </p>
               ) : (
-                <p className="text-sm text-slate-500 italic mb-3">
-                  Josh Kaufman 20-Hour Deliberate Practice Protocol
+                <p className="text-xs text-slate-500 italic mb-3">
+                  Quy trình 20 giờ thực hành tập trung có chủ đích theo Josh Kaufman
                 </p>
               )}
 
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs">
-                <div className="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60 text-slate-300">
-                  Logged:{' '}
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs">
+                <div className="bg-slate-800/80 px-3.5 py-1.5 rounded-xl border border-slate-700/60 text-slate-300">
+                  Đã thực hành:{' '}
                   <span className="font-bold text-white ml-1">
                     {formatHours(skill.logged_hours)}
                   </span>
                 </div>
-                <div className="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60 text-slate-300">
-                  Remaining:{' '}
+                <div className="bg-slate-800/80 px-3.5 py-1.5 rounded-xl border border-slate-700/60 text-slate-300">
+                  Còn lại:{' '}
                   <span className="font-bold text-white ml-1">
                     {formatHours(remaining)}
                   </span>
                 </div>
                 <div className="text-slate-500 text-xs hidden sm:block">
-                  Target: {skill.target_hours} Hours
+                  Mục tiêu chuẩn: {skill.target_hours} Giờ
                 </div>
               </div>
             </div>
@@ -135,8 +135,8 @@ export function SkillDetail() {
                   boxShadow: `0 8px 24px ${skill.color}33`,
                 }}
               >
-                <Play className="w-5 h-5 fill-white" />
-                <span>Start Practice Session</span>
+                <Play className="w-4 h-4 fill-white" />
+                <span>Bắt đầu Luyện tập</span>
               </button>
             </div>
           </div>
@@ -164,7 +164,7 @@ export function SkillDetail() {
                       isActive ? 'text-emerald-400' : 'text-slate-500'
                     )}
                   />
-                  <span className="text-xs font-semibold">{tab.label}</span>
+                  <span className="text-xs font-bold">{tab.label}</span>
                 </div>
                 <span className="text-[10px] text-slate-500 truncate max-w-full font-medium">
                   {tab.subtitle}

@@ -29,28 +29,28 @@ export function BarriersTab() {
       <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-2">
           <div>
-            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-              🛡️ Pillar 3: Barrier Removal Checklist
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              🛡️ Trụ cột 3: Loại Bỏ Rào Cản (Barrier Removal Checklist)
             </h2>
-            <p className="text-sm text-slate-400 mt-1">
-              Eliminate physical, mental, and environmental friction before sitting down to practice.
+            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+              Triệt tiêu mọi lực ma sát về môi trường, thiết bị và tâm lý trước khi ngồi vào bàn luyện tập.
             </p>
           </div>
           <div className="flex gap-2">
             <button
               onClick={resetBarriers}
-              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-400 hover:text-white transition-colors"
-              title="Reset all checklist items to unchecked for next session"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-400 hover:text-white transition-colors border border-slate-700"
+              title="Đặt lại toàn bộ danh sách về trạng thái chưa đánh dấu cho buổi tập mới"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              Reset
+              Đặt lại
             </button>
             <button
               onClick={() => setShowInput(!showInput)}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-medium transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-semibold transition-colors border border-slate-700"
             >
               <Plus className="w-3.5 h-3.5 text-emerald-400" />
-              Add Check
+              Thêm mục kiểm tra
             </button>
           </div>
         </div>
@@ -64,11 +64,11 @@ export function BarriersTab() {
           >
             <ShieldCheck className="w-6 h-6 text-emerald-400 shrink-0" />
             <div>
-              <p className="text-sm font-semibold text-emerald-300">
-                Friction Removed: You are 100% Ready!
+              <p className="text-xs font-bold text-emerald-300 uppercase tracking-wider">
+                Môi trường hoàn hảo: Đã sẵn sàng 100%!
               </p>
               <p className="text-xs text-emerald-400/80 mt-0.5">
-                Every barrier is cleared. Jump straight into the Focus Timer without excuses.
+                Mọi rào cản và yếu tố xao nhãng đã được dọn sạch. Bạn có thể bắt đầu tính giờ thực hành ngay!
               </p>
             </div>
           </motion.div>
@@ -76,9 +76,9 @@ export function BarriersTab() {
 
         {/* Progress indicator */}
         {barriers.length > 0 && !allChecked && (
-          <div className="mt-4 flex items-center justify-between text-xs text-slate-400 bg-slate-950/40 px-3.5 py-2 rounded-xl border border-slate-800/60">
-            <span>Pre-session checklist status:</span>
-            <span className="font-semibold text-slate-200">{checkedCount} of {barriers.length} cleared</span>
+          <div className="mt-4 flex items-center justify-between text-xs text-slate-400 bg-slate-950/40 px-3.5 py-2.5 rounded-xl border border-slate-800/80">
+            <span>Tiến độ dọn dẹp trước phiên:</span>
+            <span className="font-semibold text-slate-200">{checkedCount} / {barriers.length} mục đã sẵn sàng</span>
           </div>
         )}
 
@@ -97,16 +97,16 @@ export function BarriersTab() {
                   value={newLabel}
                   onChange={(e) => setNewLabel(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder='e.g., "Phone on Do Not Disturb", "Guitar out of case on stand", "Tabs printed"'
-                  className="flex-1 px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
+                  placeholder='Ví dụ: "Điện thoại bật chế độ Không làm phiền", "Đàn đã chỉnh dây sẵn trên giá", "Bàn học dọn sạch"...'
+                  className="flex-1 px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-xs focus:outline-none focus:border-emerald-500 transition-colors"
                   autoFocus
                 />
                 <button
                   onClick={handleAdd}
                   disabled={!newLabel.trim()}
-                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 text-white font-medium text-xs transition-colors"
+                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 text-white font-bold text-xs transition-colors"
                 >
-                  Add
+                  Thêm
                 </button>
               </div>
             </motion.div>
@@ -145,7 +145,7 @@ export function BarriersTab() {
 
               <span
                 className={cn(
-                  'flex-1 text-sm font-medium transition-colors',
+                  'flex-1 text-xs font-medium transition-colors',
                   barrier.is_checked ? 'text-emerald-300 font-normal' : 'text-slate-200'
                 )}
               >
@@ -158,7 +158,7 @@ export function BarriersTab() {
                   removeBarrier(barrier.id);
                 }}
                 className="shrink-0 p-1.5 rounded-lg text-slate-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
-                title="Delete item"
+                title="Xóa mục này"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -170,15 +170,15 @@ export function BarriersTab() {
       {barriers.length === 0 && !showInput && (
         <div className="text-center py-16 px-4 bg-slate-900/40 border border-dashed border-slate-800 rounded-2xl">
           <Sparkles className="w-10 h-10 text-emerald-400 mx-auto mb-3 opacity-60" />
-          <h3 className="text-base font-semibold text-slate-300 mb-1">No barriers listed</h3>
-          <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4">
-            List pre-flight checks like "Water bottle filled", "Door closed", "Laptop notifications muted".
+          <h3 className="text-sm font-bold text-slate-300 mb-1">Chưa có danh mục rào cản</h3>
+          <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4 leading-relaxed">
+            Tạo các danh mục chuẩn bị trước giờ tập như "Uống đủ nước", "Đóng cửa phòng", "Tắt tab mạng xã hội".
           </p>
           <button
             onClick={() => setShowInput(true)}
-            className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors"
+            className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors"
           >
-            Add Checklist Item
+            Thêm mục kiểm tra đầu tiên
           </button>
         </div>
       )}

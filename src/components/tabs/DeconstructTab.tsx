@@ -29,19 +29,19 @@ export function DeconstructTab() {
       <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-2">
           <div>
-            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-              🧩 Pillar 1: Skill Deconstructor
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              🧩 Trụ cột 1: Phân Rã Kỹ Năng (Skill Deconstruction)
             </h2>
-            <p className="text-sm text-slate-400 mt-1">
-              Break down the target skill into micro-components. Star (★) sub-skills that deliver 80% of results.
+            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+              Chia nhỏ kỹ năng chính thành các kỹ năng vi mô (micro-skills). Đánh dấu sao (★) cho 20% kỹ năng mang lại 80% hiệu quả thực tế để ưu tiên luyện trước.
             </p>
           </div>
           <button
             onClick={() => setShowInput(!showInput)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-sm text-slate-300 font-medium transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-semibold transition-colors border border-slate-700"
           >
             <Plus className="w-4 h-4 text-emerald-400" />
-            Add Sub-skill
+            Thêm kỹ năng con
           </button>
         </div>
 
@@ -60,16 +60,16 @@ export function DeconstructTab() {
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="e.g., Ukulele: 4 basic chords (C, G, Am, F) or Finger placement"
-                  className="flex-1 px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors text-sm"
+                  placeholder="Ví dụ: Đàn Ukulele: 4 hợp âm cơ bản (C, G, Am, F) hoặc Kỹ thuật rải ngón..."
+                  className="flex-1 px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors text-xs"
                   autoFocus
                 />
                 <button
                   onClick={handleAdd}
                   disabled={!newName.trim()}
-                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 text-white font-medium text-sm transition-colors"
+                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 text-white font-bold text-xs transition-colors"
                 >
-                  Add
+                  Thêm
                 </button>
               </div>
             </motion.div>
@@ -82,11 +82,11 @@ export function DeconstructTab() {
         <div className="space-y-3">
           <div className="flex items-center gap-2 px-1">
             <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-            <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider">
-              80/20 High-Impact Focus
+            <h3 className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+              Trọng tâm 80/20 (Ưu tiên hàng đầu)
             </h3>
-            <span className="text-xs text-slate-500 font-normal">
-              ({prioritySkills.length} prioritized micro-skills)
+            <span className="text-[11px] text-slate-500 font-normal">
+              — Luyện các kỹ năng này trước để thấy tiến bộ nhanh nhất
             </span>
           </div>
           <div className="space-y-2">
@@ -111,10 +111,10 @@ export function DeconstructTab() {
         <div className="space-y-3">
           {prioritySkills.length > 0 && (
             <div className="flex items-center gap-2 px-1">
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
-                Additional Sub-skills
+              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                Kỹ năng phụ trợ khác
               </h3>
-              <span className="text-xs text-slate-500">({otherSkills.length})</span>
+              <span className="text-[11px] text-slate-500">({otherSkills.length} mục)</span>
             </div>
           )}
           <div className="space-y-2">
@@ -136,18 +136,18 @@ export function DeconstructTab() {
 
       {subSkills.length === 0 && !showInput && (
         <div className="text-center py-16 px-4 bg-slate-900/40 border border-dashed border-slate-800 rounded-2xl">
-          <div className="w-12 h-12 rounded-xl bg-slate-800/80 flex items-center justify-center mx-auto mb-3 text-2xl">
+          <div className="w-12 h-12 rounded-2xl bg-slate-800/80 flex items-center justify-center mx-auto mb-3 text-2xl">
             🧩
           </div>
-          <h3 className="text-base font-semibold text-slate-300 mb-1">No sub-skills yet</h3>
-          <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4">
-            Josh Kaufman advises breaking complex skills into tiny sub-skills so you can focus on the vital 20% first.
+          <h3 className="text-sm font-bold text-slate-300 mb-1">Chưa có kỹ năng con nào</h3>
+          <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4 leading-relaxed">
+            Josh Kaufman khuyên nên phân tách kỹ năng lớn thành các thao tác nhỏ nhất có thể để loại bỏ cảm giác choáng ngợp.
           </p>
           <button
             onClick={() => setShowInput(true)}
-            className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors"
+            className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors"
           >
-            Add First Sub-skill
+            Thêm kỹ năng con đầu tiên
           </button>
         </div>
       )}
@@ -186,7 +186,7 @@ function SubSkillItem({
       <button
         onClick={onToggleComplete}
         className="shrink-0 p-0.5 rounded text-slate-500 hover:text-emerald-400 transition-colors"
-        title={sub.is_completed ? 'Mark incomplete' : 'Mark completed'}
+        title={sub.is_completed ? 'Đánh dấu chưa xong' : 'Đánh dấu đã thuần thục'}
       >
         {sub.is_completed ? (
           <CheckCircle2 className="w-5 h-5 text-emerald-400" />
@@ -199,7 +199,7 @@ function SubSkillItem({
 
       <span
         className={cn(
-          'flex-1 text-sm font-medium',
+          'flex-1 text-xs font-medium',
           sub.is_completed ? 'text-slate-500 line-through' : 'text-slate-200'
         )}
       >
@@ -209,12 +209,12 @@ function SubSkillItem({
       <button
         onClick={onTogglePriority}
         className={cn(
-          'shrink-0 flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium transition-all',
+          'shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all',
           sub.is_priority
             ? 'bg-amber-500/20 text-amber-300 hover:bg-amber-500/30'
             : 'text-slate-500 hover:text-amber-400 hover:bg-slate-800'
         )}
-        title="Toggle 80/20 High-Impact Tag"
+        title="Bật/Tắt nhãn ưu tiên 80/20"
       >
         <Star
           className={cn(
@@ -222,13 +222,13 @@ function SubSkillItem({
             sub.is_priority ? 'fill-amber-400 text-amber-400' : 'text-slate-500'
           )}
         />
-        <span className="hidden sm:inline">{sub.is_priority ? '80/20' : 'Prioritize'}</span>
+        <span className="hidden sm:inline">{sub.is_priority ? '80/20' : 'Ưu tiên'}</span>
       </button>
 
       <button
         onClick={onRemove}
         className="shrink-0 p-1 rounded-lg text-slate-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
-        title="Delete sub-skill"
+        title="Xóa kỹ năng con này"
       >
         <Trash2 className="w-4 h-4" />
       </button>

@@ -14,24 +14,24 @@ export function PracticeTab() {
       <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-              ⏱️ Practice Sessions & Emotional Feedback
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              ⏱️ Lịch Sử Thực Hành & Nhật Ký Cảm Xúc
             </h2>
-            <p className="text-sm text-slate-400 mt-1">
-              Review your deliberate practice duration, post-session confidence, and self-correction notes.
+            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+              Theo dõi thời lượng từng buổi, mức độ tự tin sau mỗi phiên và ghi chú tự sửa sai để cải thiện liên tục.
             </p>
           </div>
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-800 text-slate-400">
-            {sessions.length} sessions logged
+          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300">
+            {sessions.length} phiên đã ghi nhận
           </span>
         </div>
 
         {sessions.length === 0 ? (
           <div className="text-center py-12 px-4 bg-slate-950/40 rounded-xl border border-dashed border-slate-800">
             <Clock className="w-8 h-8 text-slate-600 mx-auto mb-2" />
-            <p className="text-sm text-slate-400 font-medium">No sessions logged yet</p>
+            <p className="text-sm font-semibold text-slate-400">Chưa có phiên luyện tập nào được lưu</p>
             <p className="text-xs text-slate-600 mt-1">
-              Click the "Practice Now" button above to launch your first focus session.
+              Nhấn nút "Bắt đầu phiên luyện tập" ở trên để khởi động đồng hồ bấm giờ đầu tiên.
             </p>
           </div>
         ) : (
@@ -47,11 +47,11 @@ export function PracticeTab() {
       <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-2">
           <div>
-            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-              🏆 Kaufman 20-Hour Milestone Proof of Work
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              🏆 Bằng Chứng Cột Mốc 20 Giờ (Proof of Work)
             </h2>
-            <p className="text-sm text-slate-400 mt-1">
-              Milestone checkpoints at Hour 1, 5, 10, 15, and 20. Log audio/video URLs or reflection summaries to document your breakthrough.
+            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+              Các mốc kiểm định tại Giờ 1, 5, 10, 15 và 20. Lưu lại kết quả, đường dẫn video/audio minh chứng cho sự bứt phá của bạn.
             </p>
           </div>
         </div>
@@ -104,7 +104,7 @@ function SessionCard({
           <div>
             <div className="flex items-center gap-2">
               <span className="text-sm font-semibold text-white">
-                {Math.round(session.duration_minutes)} min Practice
+                {Math.round(session.duration_minutes)} phút thực hành
               </span>
               {session.emotion && (
                 <span className="text-xs px-2 py-0.5 rounded-md bg-slate-800 border border-slate-700 text-slate-300">
@@ -113,7 +113,7 @@ function SessionCard({
               )}
             </div>
             <p className="text-xs text-slate-500 mt-0.5">
-              {date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })} at{' '}
+              {date.toLocaleDateString('vi-VN', { month: 'numeric', day: 'numeric', year: 'numeric' })} lúc{' '}
               {date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </p>
           </div>
@@ -123,14 +123,14 @@ function SessionCard({
           {session.confidence_score !== null && (
             <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs">
               <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-400 font-semibold">{session.confidence_score}/10</span>
-              <span className="text-slate-400 hidden sm:inline">confidence</span>
+              <span className="text-emerald-400 font-bold">{session.confidence_score}/10</span>
+              <span className="text-slate-400 hidden sm:inline">tự tin</span>
             </div>
           )}
           {session.notes && (
             <span className="text-xs text-slate-400 flex items-center gap-1">
               <MessageSquare className="w-3.5 h-3.5" />
-              Notes
+              Ghi chú
             </span>
           )}
           {expanded ? (
@@ -152,10 +152,10 @@ function SessionCard({
             <div className="mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 space-y-2">
               <div>
                 <span className="font-semibold text-slate-400 uppercase tracking-wider text-[10px]">
-                  Self-Correction & Insights:
+                  Tự sửa sai & Đúc kết kinh nghiệm:
                 </span>
                 <p className="mt-1 p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 text-slate-200 leading-relaxed">
-                  {session.notes || 'No specific notes recorded for this session.'}
+                  {session.notes || 'Không có ghi chú thêm cho phiên này.'}
                 </p>
               </div>
             </div>
@@ -206,7 +206,7 @@ function MilestoneCard({
         <div className="flex items-center gap-3.5">
           <div
             className={cn(
-              'w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 border',
+              'w-11 h-11 rounded-xl flex items-center justify-center font-bold text-xs shrink-0 border',
               isAchieved
                 ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
                 : isUnlocked
@@ -219,17 +219,17 @@ function MilestoneCard({
 
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold text-white">
-                Milestone: Hour {milestone.hour_mark}
+              <span className="text-sm font-bold text-white">
+                Cột mốc: Giờ {milestone.hour_mark}
               </span>
               {isAchieved && (
                 <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                  <CheckCircle className="w-3 h-3" /> Done
+                  <CheckCircle className="w-3 h-3" /> Đạt được
                 </span>
               )}
             </div>
             <p className="text-xs text-slate-400 mt-0.5">
-              {milestone.title || `Milestone Checkpoint at ${milestone.hour_mark} hours`}
+              {milestone.title || `Kiểm tra cột mốc tại mốc ${milestone.hour_mark} giờ`}
             </p>
           </div>
         </div>
@@ -239,17 +239,17 @@ function MilestoneCard({
             <button
               onClick={() => setEditing(true)}
               className={cn(
-                'px-3.5 py-1.5 rounded-lg text-xs font-medium transition-colors',
+                'px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors',
                 isAchieved
-                  ? 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+                  ? 'bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700'
                   : 'bg-emerald-600 hover:bg-emerald-500 text-white'
               )}
             >
-              {isAchieved ? 'Update Proof' : 'Log Proof of Work'}
+              {isAchieved ? 'Cập nhật bằng chứng' : 'Ghi nhận bằng chứng'}
             </button>
           )}
           {!isUnlocked && (
-            <span className="text-xs text-slate-500 font-medium">Locked</span>
+            <span className="text-xs text-slate-500 font-medium">Đang khóa</span>
           )}
         </div>
       </div>
@@ -279,18 +279,18 @@ function MilestoneCard({
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-lg font-bold text-white mb-1">
-                Hour {milestone.hour_mark} Proof of Work
+                Bằng chứng Cột mốc Giờ thứ {milestone.hour_mark}
               </h3>
-              <p className="text-xs text-slate-400 mb-4">
-                Record what you can execute now that you couldn't at Hour 0. You can also paste audio/video links or audio clip references.
+              <p className="text-xs text-slate-400 mb-4 leading-relaxed">
+                Ghi chép lại những gì bạn có thể thực hiện được mà trước đây không làm được. Có thể đính kèm liên kết clip video hoặc ghi âm kết quả.
               </p>
 
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="e.g., Can play 4 chords fluently at 60 bpm. Recorded video link: https://youtube.com/..."
+                placeholder="Ví dụ: Đã đánh trọn vẹn bài hát ở tempo 80 mà không vấp. Link video clip: https://youtube.com/..."
                 rows={4}
-                className="w-full px-4 py-3 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 transition-colors resize-none mb-4"
+                className="w-full px-4 py-3 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-xs focus:outline-none focus:border-emerald-500 transition-colors resize-none mb-4 leading-relaxed"
                 autoFocus
               />
 
@@ -299,13 +299,13 @@ function MilestoneCard({
                   onClick={() => setEditing(false)}
                   className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition-colors"
                 >
-                  Cancel
+                  Hủy
                 </button>
                 <button
                   onClick={handleSave}
-                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors"
+                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors"
                 >
-                  Save Milestone Proof
+                  Lưu bằng chứng cột mốc
                 </button>
               </div>
             </motion.div>

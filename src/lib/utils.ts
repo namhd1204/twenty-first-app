@@ -5,9 +5,9 @@ export function cn(...classes: (string | false | null | undefined)[]): string {
 export function formatHours(hours: number): string {
   const h = Math.floor(hours);
   const m = Math.round((hours - h) * 60);
-  if (h === 0) return `${m}m`;
-  if (m === 0) return `${h}h`;
-  return `${h}h ${m}m`;
+  if (h === 0) return `${m} phút`;
+  if (m === 0) return `${h} giờ`;
+  return `${h}h ${m}p`;
 }
 
 export function formatMinutes(minutes: number): string {

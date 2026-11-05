@@ -120,22 +120,33 @@ export const useAppStore = create<AppState>((set, get) => ({
       color,
       icon: 'target',
     });
-    // Create default milestones
-    const milestoneHours = [1, 5, 10, 15, 20];
-    for (const hour of milestoneHours) {
+    // Create default milestones in Vietnamese
+    const milestoneConfigs = [
+      { hour: 1, title: 'Vượt qua sự ngượng ngùng và lúng túng ban đầu' },
+      { hour: 5, title: 'Nắm vững các kỹ thuật cơ bản cốt lõi' },
+      { hour: 10, title: 'Tự nhận biết và sửa sai độc lập' },
+      { hour: 15, title: 'Hình thành phản xạ và sự trôi chảy tự nhiên' },
+      { hour: 20, title: 'Làm chủ kỹ năng thực tế — Hoàn thành 20 giờ!' },
+    ];
+    for (const m of milestoneConfigs) {
       await db.createMilestone({
         id: generateId(),
         skill_id: id,
-        hour_mark: hour,
-        title: `Hour ${hour} milestone`,
+        hour_mark: m.hour,
+        title: m.title,
         notes: '',
         proof_type: '',
         proof_data: '',
         achieved_at: null,
       });
     }
-    // Create default barriers
-    const defaultBarriers = ['Environment cleared', 'Distractions muted', 'Materials ready'];
+    // Create default barriers in Vietnamese
+    const defaultBarriers = [
+      'Điện thoại đã tắt thông báo / Bật chế độ Không làm phiền',
+      'Không gian luyện tập yên tĩnh, bàn làm việc dọn dẹp gọn gàng',
+      'Dụng cụ / Giáo trình đã mở sẵn trên bàn',
+      'Nước uống đã chuẩn bị, tinh thần thoải mái',
+    ];
     for (let i = 0; i < defaultBarriers.length; i++) {
       await db.createBarrier({
         id: generateId(),
