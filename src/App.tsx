@@ -14,17 +14,17 @@ export function App() {
   }, [loadSkills]);
 
   return (
-    <div className="flex h-screen w-screen bg-slate-950 text-slate-100 overflow-hidden font-sans">
+    <div className="flex h-screen w-screen bg-background text-foreground overflow-hidden font-sans selection:bg-accent selection:text-white">
       {/* Fixed Sidebar */}
       <Sidebar />
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden bg-slate-950">
+      <main className="flex-1 flex flex-col h-full overflow-hidden bg-background">
         {loading ? (
           <div className="flex-1 flex items-center justify-center">
             <div className="flex flex-col items-center gap-3">
-              <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-              <p className="text-xs text-slate-500 font-medium">Đang tải TwentyFirst (20 Giờ)...</p>
+              <div className="w-7 h-7 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+              <p className="text-xs text-muted-foreground font-medium tracking-tight">Đang tải TwentyFirst (20 Giờ)...</p>
             </div>
           </div>
         ) : (

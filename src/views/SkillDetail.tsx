@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowLeft, Layers, BookOpen, Shield, Timer, Play } from 'lucide-react';
+import { ArrowLeft, Layers, BookOpen, Shield, Timer, Play, CheckCircle } from 'lucide-react';
 import { useAppStore } from '../stores/appStore';
 import { cn, getProgressPercentage, formatHours } from '../lib/utils';
 import { ProgressRing } from '../components/ProgressRing';
@@ -25,10 +25,10 @@ export function SkillDetail() {
   if (!skill) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-        <p className="text-slate-400 mb-4 text-sm">Chưa chọn kỹ năng nào.</p>
+        <p className="text-muted-foreground mb-4 text-xs">Chưa chọn kỹ năng nào.</p>
         <button
           onClick={() => setCurrentView('dashboard')}
-          className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold"
+          className="px-4 py-2 rounded-md bg-accent hover:bg-accent/90 text-white text-xs font-semibold transition-colors"
         >
           Quay lại Bảng Điều Khiển
         </button>
@@ -41,86 +41,80 @@ export function SkillDetail() {
   const isCompleted = skill.logged_hours >= skill.target_hours;
 
   const tabs = [
-    { id: 'deconstruct' as const, icon: Layers, label: '1. Phân Rã Kỹ Năng', subtitle: 'Chiến lược 80/20' },
-    { id: 'resources' as const, icon: BookOpen, label: '2. Học Đủ Để Sửa Sai', subtitle: '3-5 tài liệu uy tín' },
-    { id: 'barriers' as const, icon: Shield, label: '3. Loại Bỏ Rào Cản', subtitle: 'Kiểm tra tiền trạm' },
-    { id: 'practice' as const, icon: Timer, label: '4. Đếm Giờ & Cột Mốc', subtitle: 'Thực hành 20 giờ' },
+    { id: 'deconstruct' as const, icon: Layers, label: '1. Phân Rã Kỹ Năng', subtitle: 'Nguyên lý 80/20' },
+    { id: 'resources' as const, icon: BookOpen, label: '2. Tự Sửa Sai', subtitle: '3-5 tài liệu' },
+    { id: 'barriers' as const, icon: Shield, label: '3. Loại Bỏ Rào Cản', subtitle: 'Môi trường tập' },
+    { id: 'practice' as const, icon: Timer, label: '4. Đếm Giờ & Cột Mốc', subtitle: 'Thực hành 20h' },
   ];
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="max-w-5xl mx-auto p-8 space-y-6">
-        {/* Navigation Bar */}
+      <div className="max-w-5xl mx-auto p-6 sm:p-8 space-y-6">
+        {/* Top Navigation */}
         <div className="flex items-center justify-between">
           <button
             onClick={() => setCurrentView('dashboard')}
-            className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white px-3 py-1.5 rounded-lg hover:bg-slate-800 transition-colors"
+            className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-md hover:bg-surface-hover transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Quay lại Bảng điều khiển
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Quay lại Bảng điều khiển</span>
           </button>
         </div>
 
-        {/* Campaign Hero Banner */}
+        {/* Hero Banner - Swiss Typographic Structure */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden"
+          className="bg-surface border border-border rounded-md p-6 sm:p-7 relative overflow-hidden shadow-card"
         >
-          {/* Subtle colored glow background */}
-          <div
-            className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-10 pointer-events-none"
-            style={{ backgroundColor: skill.color }}
-          />
-
-          <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+          <div className="flex flex-col md:flex-row items-center gap-6">
             {/* Progress Circular Dial */}
-            <ProgressRing progress={progress} size={110} strokeWidth={8} color={skill.color}>
-              <div className="text-center">
-                <span className="text-xl font-extrabold text-white">{Math.round(progress)}%</span>
-                <span className="block text-[10px] text-slate-400 font-medium">/ 20 giờ</span>
+            <ProgressRing progress={progress} size={96} strokeWidth={6} color={skill.color}>
+              <div className="text-center font-mono">
+                <span className="text-lg font-bold text-foreground">{Math.round(progress)}%</span>
+                <span className="block text-[10px] text-muted-foreground">/ 20h</span>
               </div>
             </ProgressRing>
 
             {/* Campaign Meta */}
-            <div className="flex-1 text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-2.5 mb-1.5">
-                <div className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: skill.color }} />
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <div className="flex-1 text-center md:text-left min-w-0">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-1.5">
+                <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: skill.color }} />
+                <h1 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight truncate">
                   {skill.name}
                 </h1>
                 {isCompleted && (
-                  <span className="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-                    Đã Thuần Thục (20h)
+                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-success px-2 py-0.5 rounded-xs bg-success/10 border border-success/20">
+                    <CheckCircle className="w-3 h-3" /> Thuần Thục (20h)
                   </span>
                 )}
               </div>
 
               {skill.description ? (
-                <p className="text-sm text-slate-400 max-w-xl line-clamp-2 mb-3">
+                <p className="text-xs text-muted-foreground max-w-xl line-clamp-2 mb-3 leading-relaxed">
                   {skill.description}
                 </p>
               ) : (
-                <p className="text-xs text-slate-500 italic mb-3">
+                <p className="text-xs text-muted-foreground italic mb-3">
                   Quy trình 20 giờ thực hành tập trung có chủ đích theo Josh Kaufman
                 </p>
               )}
 
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs">
-                <div className="bg-slate-800/80 px-3.5 py-1.5 rounded-xl border border-slate-700/60 text-slate-300">
-                  Đã thực hành:{' '}
-                  <span className="font-bold text-white ml-1">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs">
+                <div className="bg-background px-3 py-1 rounded-md border border-border text-muted-foreground font-mono">
+                  Đã tập:{' '}
+                  <strong className="text-foreground ml-1">
                     {formatHours(skill.logged_hours)}
-                  </span>
+                  </strong>
                 </div>
-                <div className="bg-slate-800/80 px-3.5 py-1.5 rounded-xl border border-slate-700/60 text-slate-300">
+                <div className="bg-background px-3 py-1 rounded-md border border-border text-muted-foreground font-mono">
                   Còn lại:{' '}
-                  <span className="font-bold text-white ml-1">
+                  <strong className="text-foreground ml-1">
                     {formatHours(remaining)}
-                  </span>
+                  </strong>
                 </div>
-                <div className="text-slate-500 text-xs hidden sm:block">
-                  Mục tiêu chuẩn: {skill.target_hours} Giờ
+                <div className="text-muted-foreground text-xs font-mono hidden sm:block">
+                  Mục tiêu: {skill.target_hours}h
                 </div>
               </div>
             </div>
@@ -129,13 +123,9 @@ export function SkillDetail() {
             <div className="shrink-0 w-full md:w-auto">
               <button
                 onClick={() => setShowTimer(true)}
-                className="w-full md:w-auto flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
-                style={{
-                  backgroundColor: skill.color,
-                  boxShadow: `0 8px 24px ${skill.color}33`,
-                }}
+                className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-md font-semibold text-xs text-white bg-accent hover:bg-accent/90 transition-colors shadow-xs"
               >
-                <Play className="w-4 h-4 fill-white" />
+                <Play className="w-3.5 h-3.5 fill-white" />
                 <span>Bắt đầu Luyện tập</span>
               </button>
             </div>
@@ -143,7 +133,7 @@ export function SkillDetail() {
         </motion.div>
 
         {/* 4 Pillars Tab Navigation */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 bg-slate-900/60 p-1.5 border border-slate-800 rounded-2xl">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 bg-surface p-1.5 border border-border rounded-md">
           {tabs.map((tab) => {
             const isActive = skillTab === tab.id;
             return (
@@ -151,22 +141,17 @@ export function SkillDetail() {
                 key={tab.id}
                 onClick={() => setSkillTab(tab.id)}
                 className={cn(
-                  'flex flex-col items-start px-4 py-3 rounded-xl text-left transition-all',
+                  'flex flex-col items-start px-3.5 py-2.5 rounded-md text-left transition-colors',
                   isActive
-                    ? 'bg-slate-800 text-white shadow-sm border border-slate-700'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                    ? 'bg-surface-hover text-foreground font-semibold border-b-2 border-accent'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-surface-hover'
                 )}
               >
-                <div className="flex items-center gap-2 mb-0.5">
-                  <tab.icon
-                    className={cn(
-                      'w-4 h-4',
-                      isActive ? 'text-emerald-400' : 'text-slate-500'
-                    )}
-                  />
-                  <span className="text-xs font-bold">{tab.label}</span>
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <tab.icon className={cn('w-3.5 h-3.5', isActive ? 'text-accent' : 'text-muted-foreground')} />
+                  <span className="text-xs font-semibold">{tab.label}</span>
                 </div>
-                <span className="text-[10px] text-slate-500 truncate max-w-full font-medium">
+                <span className="text-[10px] text-muted-foreground font-mono truncate max-w-full">
                   {tab.subtitle}
                 </span>
               </button>
@@ -177,9 +162,9 @@ export function SkillDetail() {
         {/* Tab Content Panes */}
         <motion.div
           key={skillTab}
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.12 }}
         >
           {skillTab === 'deconstruct' && <DeconstructTab />}
           {skillTab === 'resources' && <ResourcesTab />}

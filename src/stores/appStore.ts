@@ -5,6 +5,32 @@ function generateId(): string {
   return crypto.randomUUID();
 }
 
+export type ThemeMode = 'dark' | 'light' | 'system';
+
+export function applyTheme(theme: ThemeMode) {
+  if (typeof window === 'undefined') return;
+  const root = document.documentElement;
+  const isDark =
+    theme === 'dark' ||
+    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  if (isDark) {
+    root.classList.add('dark');
+  } else {
+    root.classList.remove('dark');
+  }
+}
+
+function getInitialTheme(): ThemeMode {
+  if (typeof window === 'undefined') return 'dark';
+  const saved = localStorage.getItem('twentyfirst-theme') as ThemeMode | null;
+  if (saved && ['dark', 'light', 'system'].includes(saved)) {
+    applyTheme(saved);
+    return saved;
+  }
+  applyTheme('dark');
+  return 'dark';
+}
+
 interface AppState {
   // Skills
   skills: db.Skill[];
@@ -29,6 +55,7 @@ interface AppState {
   // Navigation
   currentView: 'dashboard' | 'skill' | 'history' | 'settings';
   skillTab: 'deconstruct' | 'resources' | 'barriers' | 'practice';
+  theme: ThemeMode;
 
   // Actions
   loadSkills: () => Promise<void>;
@@ -36,6 +63,7 @@ interface AppState {
   setActiveSkill: (skillId: string | null) => void;
   setCurrentView: (view: AppState['currentView']) => void;
   setSkillTab: (tab: AppState['skillTab']) => void;
+  setTheme: (theme: ThemeMode) => void;
 
   // Skill CRUD
   addSkill: (name: string, description: string, color: string) => Promise<string>;
@@ -87,6 +115,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   lastSessionDuration: 0,
   currentView: 'dashboard',
   skillTab: 'deconstruct',
+  theme: getInitialTheme(),
 
   loadSkills: async () => {
     set({ loading: true });
@@ -108,6 +137,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   setActiveSkill: (skillId) => set({ activeSkillId: skillId }),
   setCurrentView: (view) => set({ currentView: view }),
   setSkillTab: (tab) => set({ skillTab: tab }),
+  setTheme: (theme) => {
+    localStorage.setItem('twentyfirst-theme', theme);
+    applyTheme(theme);
+    set({ theme });
+  },
 
   addSkill: async (name, description, color) => {
     const id = generateId();

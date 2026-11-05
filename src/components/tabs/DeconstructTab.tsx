@@ -24,24 +24,24 @@ export function DeconstructTab() {
   const otherSkills = subSkills.filter(s => !s.is_priority);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Header card */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
-        <div className="flex items-center justify-between mb-2">
+      <div className="bg-surface border border-border rounded-md p-5 shadow-card">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
           <div>
-            <h2 className="text-lg font-bold text-white flex items-center gap-2">
-              🧩 Trụ cột 1: Phân Rã Kỹ Năng (Skill Deconstruction)
+            <h2 className="text-sm sm:text-base font-bold text-foreground flex items-center gap-2">
+              Trụ cột 1: Phân Rã Kỹ Năng (Skill Deconstruction)
             </h2>
-            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-              Chia nhỏ kỹ năng chính thành các kỹ năng vi mô (micro-skills). Đánh dấu sao (★) cho 20% kỹ năng mang lại 80% hiệu quả thực tế để ưu tiên luyện trước.
+            <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+              Chia nhỏ kỹ năng thành các thành phần vi mô. Đánh dấu sao (★) cho 20% kỹ năng mang lại 80% hiệu quả để ưu tiên luyện trước.
             </p>
           </div>
           <button
             onClick={() => setShowInput(!showInput)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-semibold transition-colors border border-slate-700"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-surface-hover hover:bg-surface-active text-xs text-foreground font-semibold transition-colors border border-border shrink-0 self-start sm:self-auto"
           >
-            <Plus className="w-4 h-4 text-emerald-400" />
-            Thêm kỹ năng con
+            <Plus className="w-3.5 h-3.5 text-accent" />
+            <span>Thêm kỹ năng con</span>
           </button>
         </div>
 
@@ -52,7 +52,7 @@ export function DeconstructTab() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="overflow-hidden mt-4 pt-4 border-t border-slate-800"
+              className="overflow-hidden mt-4 pt-4 border-t border-border"
             >
               <div className="flex gap-2">
                 <input
@@ -60,14 +60,14 @@ export function DeconstructTab() {
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Ví dụ: Đàn Ukulele: 4 hợp âm cơ bản (C, G, Am, F) hoặc Kỹ thuật rải ngón..."
-                  className="flex-1 px-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors text-xs"
+                  placeholder="Ví dụ: Đàn Ukulele: 4 hợp âm cơ bản (C, G, Am, F)..."
+                  className="flex-1 px-3 py-2 bg-background border border-border rounded-md text-foreground placeholder:text-muted-foreground text-xs focus-visible:outline-2 focus-visible:outline-accent transition-colors"
                   autoFocus
                 />
                 <button
                   onClick={handleAdd}
                   disabled={!newName.trim()}
-                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 text-white font-bold text-xs transition-colors"
+                  className="px-4 py-2 rounded-md bg-accent hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-xs transition-colors shrink-0"
                 >
                   Thêm
                 </button>
@@ -79,17 +79,17 @@ export function DeconstructTab() {
 
       {/* 80/20 Priority Section */}
       {prioritySkills.length > 0 && (
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 px-1">
-            <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-            <h3 className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+        <div className="space-y-2">
+          <div className="flex items-center gap-1.5 px-1">
+            <Star className="w-3.5 h-3.5 text-warning fill-warning" />
+            <h3 className="text-[11px] font-bold text-warning uppercase tracking-wider">
               Trọng tâm 80/20 (Ưu tiên hàng đầu)
             </h3>
-            <span className="text-[11px] text-slate-500 font-normal">
-              — Luyện các kỹ năng này trước để thấy tiến bộ nhanh nhất
+            <span className="text-[11px] text-muted-foreground font-mono">
+              — Luyện trước để thấy tiến bộ rõ nhất
             </span>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <AnimatePresence>
               {prioritySkills.map((sub) => (
                 <SubSkillItem
@@ -108,16 +108,16 @@ export function DeconstructTab() {
 
       {/* Other Sub-skills */}
       {otherSkills.length > 0 && (
-        <div className="space-y-3">
+        <div className="space-y-2">
           {prioritySkills.length > 0 && (
             <div className="flex items-center gap-2 px-1">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+              <h3 className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">
                 Kỹ năng phụ trợ khác
               </h3>
-              <span className="text-[11px] text-slate-500">({otherSkills.length} mục)</span>
+              <span className="text-[11px] text-muted-foreground font-mono">({otherSkills.length})</span>
             </div>
           )}
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <AnimatePresence>
               {otherSkills.map((sub) => (
                 <SubSkillItem
@@ -135,17 +135,14 @@ export function DeconstructTab() {
       )}
 
       {subSkills.length === 0 && !showInput && (
-        <div className="text-center py-16 px-4 bg-slate-900/40 border border-dashed border-slate-800 rounded-2xl">
-          <div className="w-12 h-12 rounded-2xl bg-slate-800/80 flex items-center justify-center mx-auto mb-3 text-2xl">
-            🧩
-          </div>
-          <h3 className="text-sm font-bold text-slate-300 mb-1">Chưa có kỹ năng con nào</h3>
-          <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4 leading-relaxed">
-            Josh Kaufman khuyên nên phân tách kỹ năng lớn thành các thao tác nhỏ nhất có thể để loại bỏ cảm giác choáng ngợp.
+        <div className="text-center py-12 px-4 bg-surface border border-dashed border-border rounded-md">
+          <p className="text-xs font-bold text-foreground mb-1">Chưa có kỹ năng con nào</p>
+          <p className="text-xs text-muted-foreground max-w-sm mx-auto mb-4 leading-relaxed">
+            Phân tách kỹ năng lớn thành các thao tác nhỏ nhất có thể để loại bỏ sự choáng ngợp.
           </p>
           <button
             onClick={() => setShowInput(true)}
-            className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors"
+            className="px-3.5 py-1.5 rounded-md bg-accent hover:bg-accent/90 text-white text-xs font-semibold transition-colors"
           >
             Thêm kỹ năng con đầu tiên
           </button>
@@ -171,36 +168,37 @@ function SubSkillItem({
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, x: -10 }}
       className={cn(
-        'flex items-center gap-3 px-4 py-3 rounded-xl border transition-all group',
+        'flex items-center gap-3 px-3.5 py-2.5 rounded-md border transition-colors group',
         sub.is_completed
-          ? 'bg-slate-900/40 border-slate-800/60 opacity-60'
+          ? 'bg-surface/50 border-border opacity-60'
           : isPriority
-          ? 'bg-amber-500/5 border-amber-500/30'
-          : 'bg-slate-900/80 border-slate-800 hover:border-slate-700'
+          ? 'bg-warning-subtle border-warning-border'
+          : 'bg-surface border-border hover:border-border-strong'
       )}
     >
       <button
         onClick={onToggleComplete}
-        className="shrink-0 p-0.5 rounded text-slate-500 hover:text-emerald-400 transition-colors"
+        className="shrink-0 p-0.5 rounded text-muted-foreground hover:text-success transition-colors"
         title={sub.is_completed ? 'Đánh dấu chưa xong' : 'Đánh dấu đã thuần thục'}
+        aria-label={sub.is_completed ? 'Đánh dấu chưa xong' : 'Đánh dấu đã thuần thục'}
       >
         {sub.is_completed ? (
-          <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+          <CheckCircle2 className="w-4 h-4 text-success" />
         ) : (
-          <Circle className="w-5 h-5 text-slate-600 hover:text-slate-400" />
+          <Circle className="w-4 h-4 text-muted-foreground" />
         )}
       </button>
 
-      <ChevronRight className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+      <ChevronRight className="w-3.5 h-3.5 text-muted-foreground shrink-0 opacity-40" />
 
       <span
         className={cn(
           'flex-1 text-xs font-medium',
-          sub.is_completed ? 'text-slate-500 line-through' : 'text-slate-200'
+          sub.is_completed ? 'text-muted-foreground line-through' : 'text-foreground'
         )}
       >
         {sub.name}
@@ -209,28 +207,29 @@ function SubSkillItem({
       <button
         onClick={onTogglePriority}
         className={cn(
-          'shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all',
+          'shrink-0 flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold transition-colors',
           sub.is_priority
-            ? 'bg-amber-500/20 text-amber-300 hover:bg-amber-500/30'
-            : 'text-slate-500 hover:text-amber-400 hover:bg-slate-800'
+            ? 'bg-warning/15 text-warning'
+            : 'text-muted-foreground hover:text-warning hover:bg-surface-hover'
         )}
         title="Bật/Tắt nhãn ưu tiên 80/20"
       >
         <Star
           className={cn(
-            'w-3.5 h-3.5',
-            sub.is_priority ? 'fill-amber-400 text-amber-400' : 'text-slate-500'
+            'w-3 h-3',
+            sub.is_priority ? 'fill-warning text-warning' : 'text-muted-foreground'
           )}
         />
-        <span className="hidden sm:inline">{sub.is_priority ? '80/20' : 'Ưu tiên'}</span>
+        <span className="hidden sm:inline font-mono">{sub.is_priority ? '80/20' : 'Ưu tiên'}</span>
       </button>
 
       <button
         onClick={onRemove}
-        className="shrink-0 p-1 rounded-lg text-slate-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="shrink-0 p-1 rounded text-muted-foreground hover:text-danger opacity-0 group-hover:opacity-100 transition-opacity"
         title="Xóa kỹ năng con này"
+        aria-label="Xóa kỹ năng con"
       >
-        <Trash2 className="w-4 h-4" />
+        <Trash2 className="w-3.5 h-3.5" />
       </button>
     </motion.div>
   );

@@ -9,8 +9,8 @@ interface ProgressRingProps {
 export function ProgressRing({
   progress,
   size = 120,
-  strokeWidth = 8,
-  color = '#10b981',
+  strokeWidth = 6,
+  color = 'var(--accent)',
   children,
 }: ProgressRingProps) {
   const radius = (size - strokeWidth) / 2;
@@ -18,16 +18,18 @@ export function ProgressRing({
   const offset = circumference - (Math.min(progress, 100) / 100) * circumference;
 
   return (
-    <div className="relative inline-flex items-center justify-center">
+    <div className="relative inline-flex items-center justify-center shrink-0">
       <svg width={size} height={size} className="-rotate-90">
+        {/* Background track circle using semantic border token */}
         <circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="#1e293b"
+          stroke="var(--border)"
           strokeWidth={strokeWidth}
         />
+        {/* Progress indicator circle */}
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -38,7 +40,7 @@ export function ProgressRing({
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           strokeLinecap="round"
-          className="transition-all duration-700 ease-out"
+          className="transition-all duration-500 ease-out"
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
