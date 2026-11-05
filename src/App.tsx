@@ -5,6 +5,7 @@ import { SkillDetail } from './views/SkillDetail';
 import { HistoryView } from './views/HistoryView';
 import { SettingsView } from './views/SettingsView';
 import { useAppStore } from './stores/appStore';
+import { Analytics } from '@vercel/analytics/react';
 
 export function App() {
   const { currentView, loadSkills, loading } = useAppStore();
@@ -36,6 +37,7 @@ export function App() {
           </>
         )}
       </main>
+      <Analytics />
     </div>
   );
 }
